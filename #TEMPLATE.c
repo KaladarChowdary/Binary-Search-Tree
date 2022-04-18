@@ -15,6 +15,84 @@ struct node{
 };
 
 struct node *root = NULL;
+//Function Declarations
+void init(struct node *parent,int data);
+void insert(struct node *parent, int data);
+void initialize();
+void inorder(struct node *parent);
+struct node* address(struct node *parent, int data);
+
+// Write New Function Code Here
+//Returns largest value in given subtree including the root
+struct node * lv(int data){
+	
+	struct node *trav = address(root, data);
+	while(trav->rchild != NULL){
+		trav = trav->rchild;
+	}
+	
+	return trav;	
+}
+
+struct node * sv(int data){
+	
+	struct node *trav = address(root, data);
+	while(trav->lchild != NULL){
+		trav = trav->lchild;
+	}
+	
+	return trav;	
+}
+
+struct node *is(int data){
+	struct node *parent = address(root, data);
+	if(parent->rchild == NULL){
+		if(parent->lchild == NULL){
+			printf("\n No infix successor to %d. Ending program abruptly", data);
+			exit(1);
+		}
+		return parent;
+	} 
+	else return sv(parent->rchild->data);
+}
+
+struct node *ip(int data){
+	struct node *parent = address(root, data);
+	if(parent->lchild == NULL){
+		if(parent->rchild == NULL){
+			printf("\n No infix predecessor to %d. Ending program abruptly", data);
+			exit(1);
+		}
+		return parent;
+	} 
+	else return lv(parent->lchild->data);
+}
+
+
+int main(){
+	
+	initialize();
+	inorder(root);
+	
+	
+//	THE BINARY SEARCH TREE
+//	               200
+//	     100               300
+//	  50      150        250      350
+//	25 75   125 175   225 275   325 375	
+
+//To get the address of node 250 type,
+//           address(root, 250)
+	
+// TEST THE NEW FUNCTION HERE
+printf("\n %d", ip(300)->data);
+
+
+
+	
+	printf("\n\n\n\n\n\n\n");
+	return 1;
+}
 
 //Insert data and nullify children
 void init(struct node *parent,int data){
@@ -23,7 +101,7 @@ void init(struct node *parent,int data){
 	parent->rchild = NULL;
 }
 
-//Recursive insertion
+//Recursive insertion of single value
 void insert(struct node *parent, int data){
 //	Assuming parent is filled
 	if( data < parent->data){
@@ -47,6 +125,7 @@ void insert(struct node *parent, int data){
 
 }
 
+//Create the binary search tree with predefined values
 void initialize(){
 //	Function to initialize data into node and nullify it's children
 //	Function for recursive insertion
@@ -63,6 +142,7 @@ void initialize(){
 	}
 }
 
+//Inorder Traversal
 void inorder(struct node *parent){
 	if(parent != NULL){
 		inorder(parent->lchild);
@@ -71,8 +151,12 @@ void inorder(struct node *parent){
 	}
 }
 
+//Get the address of given node
 struct node* address(struct node *parent, int data){
-	if(parent == NULL) return NULL;
+	if(parent == NULL){
+		printf("\n Given value isn't present. Ending the program abrutptly");
+		exit(1);
+	}
 	
 	if(parent -> data == data){
 		return parent;
@@ -82,20 +166,3 @@ struct node* address(struct node *parent, int data){
 	   return address(parent->rchild, data);}
 		
 }
-
-int main(){
-	
-	initialize();
-	inorder(root);	
-	int values[] = {100, 300, 50, 150, 250, 350, 25, 75, 125, 175, 225, 275, 325, 375};
-	int i;
-	for(i = 0; i<14; i++){
-	printf("\n address(root, %d)->data = %d", values[i], address(root, values[i])->data);
-
-	}
-	
-	
-	return 1;
-}
-
-
