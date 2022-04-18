@@ -23,7 +23,8 @@ void inorder(struct node *parent);
 struct node* address(struct node *parent, int data);
 
 // Write New Function Code Here
-//Returns largest value in given subtree including the root
+
+// lv(5) would return highest value in subtree that has 5 as it's root node
 struct node * lv(int data){
 	
 	struct node *trav = address(root, data);
@@ -34,6 +35,7 @@ struct node * lv(int data){
 	return trav;	
 }
 
+// sv(5) would return lowest value in subtree that has 5 as it's root node
 struct node * sv(int data){
 	
 	struct node *trav = address(root, data);
@@ -44,6 +46,7 @@ struct node * sv(int data){
 	return trav;	
 }
 
+// is(25) finds infix successor to node with data 25
 struct node *is(int data){
 	struct node *parent = address(root, data);
 	if(parent->rchild == NULL){
@@ -56,6 +59,7 @@ struct node *is(int data){
 	else return sv(parent->rchild->data);
 }
 
+// ip(25) finds infix predecessor to node with data 25
 struct node *ip(int data){
 	struct node *parent = address(root, data);
 	if(parent->lchild == NULL){
