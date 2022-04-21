@@ -50,13 +50,31 @@ struct node *prt(struct node *p, int data){
 	}
 }
 
-
+//f1(25) returns parent to the smallest node in subtree with root 25
+//Remember special cases
+struct node *f1(int data){
+	struct node *trav = address(root, data);
+	
+	if(trav->lchild == NULL){
+		printf("\n Least child is node itself, ending the program abruptly");
+		exit(0);
+	}
+	
+	while(trav->lchild->lchild != NULL){
+		trav = trav->lchild;		
+	}
+	
+	return trav;
+}
 
 
 int main(){
 	
 	initialize();
 	inorder(root);
+
+	int values[] = {100, 300, 50, 150, 250, 350, 25, 75, 125, 175, 225, 275, 325, 375};
+	int l = 14;
 	
 	
 //	THE BINARY SEARCH TREE
@@ -69,8 +87,13 @@ int main(){
 //           address(root, 250)
 	
 // TEST THE NEW FUNCTION HERE
-int test = 375;
-printf("\n Parent of %d is  = %d",test ,prt(root, test)->data);
+int i;
+	for(i = 0; i<l ; i++){
+		int test = values[i];
+		printf("\n f1(%d) = %d ",test ,f1(test)->data);
+		
+	}
+
 
 
 
