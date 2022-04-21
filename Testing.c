@@ -67,6 +67,20 @@ struct node *f1(int data){
 	return trav;
 }
 
+//f2(25) returns the parent of infix successor
+struct node *f2(int data){
+	struct node *trav = address(root, data);
+	
+	if(trav->rchild == NULL){
+		printf("\n Given node doesn't have infix successor. Ending program abruptly");
+		exit(1);
+	}else if(trav->rchild->lchild == NULL){
+		return trav;
+	}
+	
+	return f1(trav->rchild->data);
+}
+
 
 int main(){
 	
@@ -87,10 +101,12 @@ int main(){
 //           address(root, 250)
 	
 // TEST THE NEW FUNCTION HERE
+		printf("\n f2(%d) = %d ",200 ,f2(200)->data);
+
 int i;
 	for(i = 0; i<l ; i++){
 		int test = values[i];
-		printf("\n f1(%d) = %d ",test ,f1(test)->data);
+		printf("\n f2(%d) = %d ",test ,f2(test)->data);
 		
 	}
 
