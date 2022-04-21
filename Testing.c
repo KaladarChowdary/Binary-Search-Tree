@@ -1,10 +1,7 @@
 
 //1 HAVE A FULL BINARY SEARCH TREE WHEN THE PROGRAM STARTS
 //2 HAVE A FUNCTION TO GET THE ADDRESS OF ANY NODE YOU DESIRE
-//
-//1 DIVIDE EVERY CODE INTO SMALLEST COMPONENTS
-//2 EXECUTE THE SMALLEST FUNCTIONS 
-//3 EVERY PROBLEM BECOMES HUNDRED TIMES EASIER
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,53 +21,13 @@ struct node* address(struct node *parent, int data);
 
 // Write New Function Code Here
 
-// lv(5) would return highest value in subtree that has 5 as it's root node. Including 5 itself.
-struct node * lv(int data){
-	
-	struct node *trav = address(root, data);
-	while(trav->rchild != NULL){
-		trav = trav->rchild;
-	}
-	
-	return trav;	
-}
+struct node * lv(int data);
 
-// sv(5) would return lowest value in subtree that has 5 as it's root node. Including 5 itself.
-struct node * sv(int data){
-	
-	struct node *trav = address(root, data);
-	while(trav->lchild != NULL){
-		trav = trav->lchild;
-	}
-	
-	return trav;	
-}
+struct node * sv(int data);
 
-// is(25) finds infix successor to node with data 25. Ends abruptly if not present.
-struct node *is(int data){
-	struct node *parent = address(root, data);
-	if(parent->rchild == NULL){
-		if(parent->lchild == NULL){
-			printf("\n No infix successor to %d. Ending program abruptly", data);
-			exit(1);
-		}
-		return parent;
-	} 
-	else return sv(parent->rchild->data);
-}
+struct node *is(int data);
 
-// ip(25) finds infix predecessor to node with data 25. Ends abruptly if not present.
-struct node *ip(int data){
-	struct node *parent = address(root, data);
-	if(parent->lchild == NULL){
-		if(parent->rchild == NULL){
-			printf("\n No infix predecessor to %d. Ending program abruptly", data);
-			exit(1);
-		}
-		return parent;
-	} 
-	else return lv(parent->lchild->data);
-}
+struct node *ip(int data);
 
 
 int main(){
@@ -169,4 +126,55 @@ struct node* address(struct node *parent, int data){
 	}else{
 	   return address(parent->rchild, data);}
 		
+}
+
+
+//NEW FUNCTIONS 
+
+// lv(5) would return highest value in subtree that has 5 as it's root node. Including 5 itself.
+struct node * lv(int data){
+	
+	struct node *trav = address(root, data);
+	while(trav->rchild != NULL){
+		trav = trav->rchild;
+	}
+	
+	return trav;	
+}
+
+// sv(5) would return lowest value in subtree that has 5 as it's root node. Including 5 itself.
+struct node * sv(int data){
+	
+	struct node *trav = address(root, data);
+	while(trav->lchild != NULL){
+		trav = trav->lchild;
+	}
+	
+	return trav;	
+}
+
+// is(25) finds infix successor to node with data 25. Ends abruptly if not present.
+struct node *is(int data){
+	struct node *parent = address(root, data);
+	if(parent->rchild == NULL){
+		if(parent->lchild == NULL){
+			printf("\n No infix successor to %d. Ending program abruptly", data);
+			exit(1);
+		}
+		return parent;
+	} 
+	else return sv(parent->rchild->data);
+}
+
+// ip(25) finds infix predecessor to node with data 25. Ends abruptly if not present.
+struct node *ip(int data){
+	struct node *parent = address(root, data);
+	if(parent->lchild == NULL){
+		if(parent->rchild == NULL){
+			printf("\n No infix predecessor to %d. Ending program abruptly", data);
+			exit(1);
+		}
+		return parent;
+	} 
+	else return lv(parent->lchild->data);
 }
