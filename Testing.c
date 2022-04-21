@@ -11,6 +11,8 @@ struct node{
 	struct node *lchild, *rchild;
 };
 
+
+
 struct node *root = NULL;
 //Function Declarations
 void init(struct node *parent,int data);
@@ -19,15 +21,36 @@ void initialize();
 void inorder(struct node *parent);
 struct node* address(struct node *parent, int data);
 
-// Write New Function Code Here
-
+// New Function Declarations
 struct node * lv(int data);
-
 struct node * sv(int data);
-
 struct node *is(int data);
-
 struct node *ip(int data);
+
+// New Function Code
+
+//prt(25) returns address of parent of node 25
+//Assuming parent's data is already checked
+struct node *prt(struct node *p, int data){
+	if(p->lchild == NULL && p->rchild == NULL){
+		printf("\n Given node is not present. Ending program abruptly.");
+		exit(1);
+	}
+
+	
+	if((p->lchild != NULL && p->lchild->data == data)||(p->rchild!=NULL && p->rchild->data == data)){
+		return p;
+	}
+	
+	
+	if(data < p->data){
+		return prt(p->lchild, data);
+	}else if(data > p->data){
+		return prt(p->rchild, data);
+	}
+}
+
+
 
 
 int main(){
@@ -46,7 +69,8 @@ int main(){
 //           address(root, 250)
 	
 // TEST THE NEW FUNCTION HERE
-printf("\n %d", ip(300)->data);
+int test = 375;
+printf("\n Parent of %d is  = %d",test ,prt(root, test)->data);
 
 
 
