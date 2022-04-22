@@ -81,6 +81,27 @@ struct node *f2(int data){
 	return f1(trav->rchild->data);
 }
 
+//g1(25) returns parent of largest node in 25 subtree
+struct node *g1(int data){
+	struct node *trav = address(root, data);
+	
+	if(trav->rchild == NULL){
+		printf("Doesn't have any larger nodes in the subtree. Ending the program abruptly");
+		exit(1);
+	}
+	
+	while(trav->rchild->rchild != NULL){
+		trav = trav->rchild;
+	}
+	
+	return trav;
+}
+
+//g2(25) returns parent of infix predecessor to 25
+//struct node *g2(int data){
+//	
+//	
+//}
 
 int main(){
 	
@@ -106,7 +127,7 @@ int main(){
 int i;
 	for(i = 0; i<l ; i++){
 		int test = values[i];
-		printf("\n f2(%d) = %d ",test ,f2(test)->data);
+		printf("\n g1(%d) = %d ",test ,g1(test)->data);
 		
 	}
 
