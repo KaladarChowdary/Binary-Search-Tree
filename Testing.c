@@ -31,16 +31,16 @@ struct node *ip(int data);
 
 //prt(25) returns address of parent of node 25
 //Assuming parent's data is already checked
-struct node *prt(struct node *p, int data)
+struct node *prt(struct node *p, int data);
 
 //f1(25) returns parent to the smallest node in subtree with root 25
-struct node *f1(int data)
+struct node *f1(int data);
 //f2(25) returns the parent of infix successor
-struct node *f2(int data)
+struct node *f2(int data);
 //g1(25) returns parent of largest node in 25 subtree
-struct node *g1(int data)
+struct node *g1(int data);
 //g2(25) returns parent of infix predecessor to 25
-struct node *g2(int data)
+struct node *g2(int data);
 
 struct node delete(int data){
 
@@ -54,8 +54,14 @@ struct node delete(int data){
 	struct node *pt = prt(root, data);
 	
 //Find whether the node to be deleted is left child or not
-	if(pt->lchild == del) left = 1;
-	else left = 0;
+	if(pt->lchild == del){
+	 left = 1;
+
+	 }
+	else {
+	left = 0;
+
+}
 
 //If it doesn't have any children then Nullify
 	if(del->lchild == NULL && del->rchild == NULL){
@@ -70,12 +76,13 @@ struct node delete(int data){
 //Atleast Left Child
 	if(del->lchild != NULL){
 //		lchild of the del is itself infix predecessor
+
 		if(del->lchild->rchild == NULL){
 			neww = del->lchild;
 			neww->rchild = del->rchild;
 			neww->lchild = NULL;
 			
-			if(left == 1) pt-lchild == neww;
+			if(left == 1) pt->lchild = neww;
 			else pt->lchild = neww;
 			
 			printf("\n %d successfully deleted", data);
@@ -83,14 +90,15 @@ struct node delete(int data){
 		}
 		
 		struct node *ipp = g2(data);
+
 		struct node *ip = ipp->rchild;
 		ipp->rchild = ip->lchild;
 		
 		ip -> lchild = del -> lchild;
 		ip -> rchild = del -> rchild;
 		
-		if(left == 1) pt -> lchild = neww;
-		else pt -> rchild == neww;
+		if(left == 1) pt -> lchild = ip;
+		else pt -> rchild = ip;
 		
 		printf("\n %d successfully deleted", data);
 		return;	
@@ -104,15 +112,17 @@ struct node delete(int data){
 			return;	
 		}
 		
-		struct node *isp = f2(data)
+		struct node *isp = f2(data);
 		struct node *is = isp->lchild;
 		isp->lchild = is->rchild;
 		
 		is->lchild = del->lchild;
 		is->rchild = del->rchild;
 		
-		if(left == 1) pt->lchild = is;
-		else pt->rchild = is;
+		if(left == 1){
+		 pt->lchild = is;}
+		else {
+		pt->rchild = is;}
 		
 		printf("\n %d successfully deleted", data);
 		return;	
@@ -141,13 +151,24 @@ int main(){
 // TEST THE NEW FUNCTION HERE
 
 
-//		printf("\n g2(%d) = %d ",200 ,g2(200)->data);
-//int i;
-//	for(i = 0; i<l ; i++){
-//		int test = values[i];
-//		printf("\n g2(%d) = %d ",test ,g2(test)->data);
-//		
-//	}
+int i;
+	for(i = 0; i<l ; i++){
+	printf("\n-----------------------------------------------------------------------------------------------------------------");
+	int test = values[i];
+	initialize();
+	printf("\nDeleting %d", test);
+	delete(test);
+	printf("\n Inorder printing after deletion");
+	inorder(root);
+	printf("\n-----------------------------------------------------------------------------------------------------------------");
+
+		
+	}
+
+
+
+	
+
 
 
 
