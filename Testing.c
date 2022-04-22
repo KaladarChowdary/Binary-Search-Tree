@@ -43,42 +43,41 @@ struct node *g1(int data);
 struct node *g2(int data);
 
 struct node delete(int data){
-
 	struct node *neww;
 	int left;
 
-
 //  Find the node to be deleted
 	struct node *del = address(root, data);
-//	Find the nodes parent
+	
+
+	
+//	Find the parent of the node to be deleted;
 	struct node *pt = prt(root, data);
+
 	
 //Find whether the node to be deleted is left child or not
 	if(pt->lchild == del){
+//		If node to be deleted is leftchild then left = 1
 	 left = 1;
+//printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>LEFT CHILD");
 
-	 }
+	  }
 	else {
-	left = 0;
+//	    Else left would be zero
+//printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>RIGHT CHILD");
 
-}
+	left = 0;}
 
 //If it doesn't have any children then Nullify
 	if(del->lchild == NULL && del->rchild == NULL){
-		printf("\n DELETING LEAF NODE");
 		
 		if(left == 1){
-			printf("\n LEAF IS LEFT CHILD TO THE PARENT");
-			printf("\n parent = %d, child = %d", pt->data, pt->lchild->data);
-			pt->lchild = NULL;
-
-			
+			pt->lchild = NULL;			
 		}else{
-			printf("\n LEAF IS RIGHT CHILD TO THE PARENT");
-			printf("\n parent = %d, child = %d", pt->data, pt->rchild->data);
-			pt->rchild == NULL;
+			pt->rchild = NULL;
 		}
 		
+	
 		printf("\n %d successfully deleted", data);
 		return;
 
@@ -90,11 +89,23 @@ struct node delete(int data){
 
 		if(del->lchild->rchild == NULL){
 			neww = del->lchild;
+//			printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>new->data = %d", neww->data);
 			neww->rchild = del->rchild;
+			del->rchild = NULL;
 			neww->lchild = NULL;
 			
-			if(left == 1) pt->lchild = neww;
-			else pt->lchild = neww;
+			if(left == 1){
+				
+				pt->lchild = neww;
+
+			}
+			else{
+			
+
+				pt->rchild = neww;
+			} 
+			
+//			printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>pt->data = %d, pt->Rchild->data = %d", pt->data, pt->rchild->data);
 			
 			printf("\n %d successfully deleted", data);
 			return;			
@@ -144,6 +155,7 @@ struct node delete(int data){
 int main(){
 	
 	initialize();
+	printf("\n");
 	inorder(root);
 
 	int values[] = {100, 300, 50, 150, 250, 350, 25, 75, 125, 175, 225, 275, 325, 375};
@@ -161,26 +173,24 @@ int main(){
 	
 // TEST THE NEW FUNCTION HERE
 
-
-int i;
-	for(i = 0; i<l ; i++){
-	printf("\n-----------------------------------------------------------------------------------------------------------------");
-	int test = values[i];
-	initialize();
-	printf("\nDeleting %d", test);
-	delete(test);
-	printf("\n Inorder printing after deletion");
-	inorder(root);
-	printf("\n-----------------------------------------------------------------------------------------------------------------");
-
+	printf("\n");
+	
+	int i;
+	int test;
+	for(i = 0; i<l; i++){
+		initialize();
+		test = values[i];
+		printf("\nDeleting %d", test);
+		delete(test);
+		printf("\n");
+		inorder(root);
 		
 	}
 
-
-
-	
-
-
+//test = 150;
+//delete(150);
+//printf("\n Deleted 150\n");
+//inorder(root);
 
 
 
