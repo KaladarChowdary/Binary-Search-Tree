@@ -42,7 +42,7 @@ struct node *g1(int data);
 //g2(25) returns parent of infix predecessor to 25
 struct node *g2(int data);
 
-struct node delete(int data){
+void delete(int data){
 	struct node *neww;
 	int left;
 
@@ -78,7 +78,6 @@ struct node delete(int data){
 		}
 		
 	
-		printf("\n %d successfully deleted", data);
 		return;
 
 	}
@@ -107,7 +106,6 @@ struct node delete(int data){
 			
 //			printf("\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>pt->data = %d, pt->Rchild->data = %d", pt->data, pt->rchild->data);
 			
-			printf("\n %d successfully deleted", data);
 			return;			
 		}
 		
@@ -122,7 +120,6 @@ struct node delete(int data){
 		if(left == 1) pt -> lchild = ip;
 		else pt -> rchild = ip;
 		
-		printf("\n %d successfully deleted", data);
 		return;	
 		
 		
@@ -130,7 +127,6 @@ struct node delete(int data){
 		if(del->rchild->lchild == NULL ){
 			if(left == 1) pt->lchild = del->rchild;
 			else pt->rchild = del->rchild;
-			printf("\n %d successfully deleted", data);
 			return;	
 		}
 		
@@ -146,7 +142,6 @@ struct node delete(int data){
 		else {
 		pt->rchild = is;}
 		
-		printf("\n %d successfully deleted", data);
 		return;	
 		
 	}
@@ -155,7 +150,7 @@ struct node delete(int data){
 int main(){
 	
 	initialize();
-	printf("\n");
+	printf("Printing all the nodes in tree\n");
 	inorder(root);
 
 	int values[] = {100, 300, 50, 150, 250, 350, 25, 75, 125, 175, 225, 275, 325, 375};
@@ -173,19 +168,18 @@ int main(){
 	
 // TEST THE NEW FUNCTION HERE
 
-	printf("\n");
 	
 	int i;
 	int test;
 	for(i = 0; i<l; i++){
-		initialize();
 		test = values[i];
-		printf("\nDeleting %d", test);
+		printf("\n\n(Deleted %d)", test);
 		delete(test);
-		printf("\n");
 		inorder(root);
 		
 	}
+	
+	printf("\n\n\n 200 is the root. code to delete root will be added soon");
 
 //test = 150;
 //delete(150);
