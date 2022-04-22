@@ -65,8 +65,19 @@ struct node delete(int data){
 
 //If it doesn't have any children then Nullify
 	if(del->lchild == NULL && del->rchild == NULL){
-		if(left == 1) pt->lchild == NULL;
-		else pt->rchild == NULL;
+		printf("\n DELETING LEAF NODE");
+		
+		if(left == 1){
+			printf("\n LEAF IS LEFT CHILD TO THE PARENT");
+			printf("\n parent = %d, child = %d", pt->data, pt->lchild->data);
+			pt->lchild = NULL;
+
+			
+		}else{
+			printf("\n LEAF IS RIGHT CHILD TO THE PARENT");
+			printf("\n parent = %d, child = %d", pt->data, pt->rchild->data);
+			pt->rchild == NULL;
+		}
 		
 		printf("\n %d successfully deleted", data);
 		return;
