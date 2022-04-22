@@ -98,10 +98,21 @@ struct node *g1(int data){
 }
 
 //g2(25) returns parent of infix predecessor to 25
-//struct node *g2(int data){
-//	
-//	
-//}
+struct node *g2(int data){
+	
+	struct node *trav = address(root, data);
+	
+	if(trav -> lchild == NULL){
+		printf("\nDoesn't have any infix predecessor. Ending program abruptly");
+		exit(1);
+	}else if(trav->lchild->rchild == NULL){
+		return trav;
+	}else{
+		return g1(trav->lchild->data);
+	}
+	
+	
+}
 
 int main(){
 	
@@ -122,12 +133,12 @@ int main(){
 //           address(root, 250)
 	
 // TEST THE NEW FUNCTION HERE
-		printf("\n f2(%d) = %d ",200 ,f2(200)->data);
+		printf("\n g2(%d) = %d ",200 ,g2(200)->data);
 
 int i;
 	for(i = 0; i<l ; i++){
 		int test = values[i];
-		printf("\n g1(%d) = %d ",test ,g1(test)->data);
+		printf("\n g2(%d) = %d ",test ,g2(test)->data);
 		
 	}
 
